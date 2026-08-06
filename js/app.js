@@ -14,6 +14,7 @@ import './components/class-schedule-input.js';
 import './components/user-preferences-input.js';
 import './components/schedule-view.js';
 import './components/time-block-renderer.js';
+import './components/error-display.js';
 
 // Import services
 import { loadClasses, loadPreferences, loadSchedule } from './services/storageService.js';

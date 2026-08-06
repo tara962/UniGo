@@ -1,0 +1,51 @@
+
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/utils/time.test.js (55 tests) 27ms
+ ✓ js/components/time-block-renderer.test.js (22 tests) 375ms
+ ✓ js/services/apiClient.test.js (14 tests) 43ms
+ ✓ js/services/responseParser.test.js (27 tests) 38ms
+ ✓ js/models/models.test.js (32 tests) 26ms
+ ✓ js/validators/timeBlockValidator.test.js (47 tests) 35ms
+ ✓ js/components/error-display.test.js (39 tests) 726ms
+ ✓ lambda/index.test.mjs (51 tests) 143ms
+ ✓ js/components/user-preferences-input.test.js (30 tests) 2631ms
+   ✓ UserPreferencesInput > activity selection and ranking > moves activity up in ranking 462ms
+   ✓ UserPreferencesInput > activity selection and ranking > moves activity down in ranking 334ms
+ ✓ js/components/schedule-view.test.js (62 tests) 3172ms
+ ✓ js/services/storageService.test.js (16 tests) 35ms
+ ✓ js/services/scheduleLogic.test.js (23 tests) 18ms
+ ✓ js/validators/overlapDetector.test.js (17 tests) 17ms
+ ✓ js/app.test.js (15 tests) 22ms
+ ✓ js/components/class-schedule-input.test.js (25 tests) 10676ms
+   ✓ ClassScheduleInput > registers as a custom element 422ms
+   ✓ ClassScheduleInput > renders a shadow DOM with a form 300ms
+   ✓ ClassScheduleInput > renders all form fields 402ms
+   ✓ ClassScheduleInput > populates time selects with 5-minute increments from 06:00 to 23:00 411ms
+   ✓ ClassScheduleInput > exposes classes getter returning empty array initially 354ms
+   ✓ ClassScheduleInput > adds a class when form is submitted with valid data 465ms
+   ✓ ClassScheduleInput > dispatches class-added event when a class is added 414ms
+   ✓ ClassScheduleInput > does not add a class if name is empty 460ms
+   ✓ ClassScheduleInput > does not add a class if location is empty 481ms
+   ✓ ClassScheduleInput > displays classes grouped by day 546ms
+   ✓ ClassScheduleInput > removes a class and dispatches class-removed event 421ms
+   ✓ ClassScheduleInput > disables add button and shows message at max 30 classes 616ms
+   ✓ ClassScheduleInput > does not allow adding beyond 30 classes 725ms
+   ✓ ClassScheduleInput > sets classes via setter and renders them 336ms
+   ✓ ClassScheduleInput > shows empty message when no classes are present 406ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > displays inline error when end time is equal to start time (Req 1.5) 699ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > displays inline error when end time is earlier than start time (Req 1.5) 630ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > displays inline error identifying conflicting class names and times for overlaps (Req 1.3) 312ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > blocks save until overlap conflict is resolved (Req 1.2) 303ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > persists removal to localStorage 537ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > restores classes from localStorage on page load (Req 1.4) 546ms
+ ✓ js/validators/classValidator.test.js (25 tests) 23ms
+ ✓ js/components/navigation.test.js (25 tests) 1077ms
+ ✓ js/components/app-shell.test.js (21 tests) 846ms
+ ✓ js/setup.test.js (2 tests) 6ms
+
+ Test Files  19 passed (19)
+      Tests  548 passed (548)
+   Start at  13:22:28
+   Duration  22.88s (transform 1.82s, setup 0ms, collect 7.79s, tests 19.94s, environment 148.33s, prepare 17.88s)
+

@@ -1,5 +1,7 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './schedule-view.js';
+import * as storageService from '../services/storageService.js';
+import * as apiClient from '../services/apiClient.js';
 
 describe('ScheduleView', () => {
   let el;
@@ -383,6 +385,291 @@ describe('ScheduleView', () => {
       mount();
       const renderers = el.shadowRoot.querySelectorAll('time-block-renderer');
       expect(renderers.length).toBe(4);
+    });
+  });
+
+  describe('regeneration controls (Req 10.1, 10.2, 10.3)', () => {
+    beforeEach(() => {
+      // Mock storageService methods
+      vi.spyOn(storageService, 'getRegenerationCount').mockReturnValue(0);
+      vi.spyOn(storageService, 'incrementRegenerationCount').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('hides regenerate button when no blocks are displayed', () => {
+      mount();
+      const controls = el.shadowRoot.querySelector('.regenerate-controls');
+      expect(controls.classList.contains('hidden')).toBe(true);
+    });
+
+    it('shows regenerate button when blocks are displayed', () => {
+      mount();
+      el.blocks = sampleBlocks;
+      const controls = el.shadowRoot.querySelector('.regenerate-controls');
+      expect(controls.classList.contains('hidden')).toBe(false);
+    });
+
+    it('hides regenerate button during loading', () => {
+      mount();
+      el.blocks = sampleBlocks;
+      el.loading = true;
+      const controls = el.shadowRoot.querySelector('.regenerate-controls');
+      expect(controls.classList.contains('hidden')).toBe(true);
+    });
+
+    it('shows regeneration count indicator (Req 10.3)', () => {
+      storageService.getRegenerationCount.mockReturnValue(2);
+      mount();
+      el.blocks = sampleBlocks;
+      const countEl = el.shadowRoot.querySelector('.regenerate-count');
+      expect(countEl.textContent).toBe('2/5 regenerations used');
+    });
+
+    it('shows 0/5 when no regenerations have been used', () => {
+      storageService.getRegenerationCount.mockReturnValue(0);
+      mount();
+      el.blocks = sampleBlocks;
+      const countEl = el.shadowRoot.querySelector('.regenerate-count');
+      expect(countEl.textContent).toBe('0/5 regenerations used');
+    });
+
+    it('disables button when regeneration limit (5) is reached (Req 10.3)', () => {
+      storageService.getRegenerationCount.mockReturnValue(5);
+      mount();
+      el.blocks = sampleBlocks;
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      expect(btn.disabled).toBe(true);
+    });
+
+    it('enables button when under the regeneration limit', () => {
+      storageService.getRegenerationCount.mockReturnValue(3);
+      mount();
+      el.blocks = sampleBlocks;
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      expect(btn.disabled).toBe(false);
+    });
+
+    it('shows count 5/5 and disabled button at max', () => {
+      storageService.getRegenerationCount.mockReturnValue(5);
+      mount();
+      el.blocks = sampleBlocks;
+      const countEl = el.shadowRoot.querySelector('.regenerate-count');
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      expect(countEl.textContent).toBe('5/5 regenerations used');
+      expect(btn.disabled).toBe(true);
+    });
+
+    it('calls API with incremented seed on regenerate click (Req 10.1)', async () => {
+      const mockResult = {
+        success: true,
+        timeBlocks: [
+          { startTime: '10:40', endTime: '11:30', type: 'activity', name: 'New Activity', location: 'Library' }
+        ]
+      };
+      vi.spyOn(apiClient, 'generateSchedule').mockResolvedValue(mockResult);
+      storageService.getRegenerationCount.mockReturnValue(0);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'monday';
+      el.classes = [{ name: 'Test', day: 'monday', startTime: '09:00', endTime: '10:30', location: 'Room' }];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      // Wait for the async operation
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      expect(apiClient.generateSchedule).toHaveBeenCalledWith({
+        day: 'monday',
+        classes: el.classes,
+        preferences: el.preferences,
+        seed: 2 // Incremented from 1
+      });
+    });
+
+    it('increments regeneration count in storage after successful regeneration (Req 10.3)', async () => {
+      const mockResult = {
+        success: true,
+        timeBlocks: [
+          { startTime: '10:40', endTime: '11:30', type: 'activity', name: 'New', location: 'Lib' }
+        ]
+      };
+      vi.spyOn(apiClient, 'generateSchedule').mockResolvedValue(mockResult);
+      storageService.getRegenerationCount.mockReturnValue(1);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'tuesday';
+      el.gapIndex = 2;
+      el.classes = [];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      expect(storageService.incrementRegenerationCount).toHaveBeenCalledWith('tuesday', 2);
+    });
+
+    it('replaces displayed schedule after successful regeneration (Req 10.2)', async () => {
+      const mockResult = {
+        success: true,
+        timeBlocks: [
+          { startTime: '10:40', endTime: '11:30', type: 'activity', name: 'New Activity', location: 'Library' }
+        ]
+      };
+      vi.spyOn(apiClient, 'generateSchedule').mockResolvedValue(mockResult);
+      storageService.getRegenerationCount.mockReturnValue(0);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'monday';
+      el.classes = [];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      // Should keep class blocks and replace generated blocks
+      const classBlocks = el.blocks.filter(b => b.type === 'class');
+      const activityBlocks = el.blocks.filter(b => b.type === 'activity');
+      expect(classBlocks.length).toBe(1); // Original class block preserved
+      expect(activityBlocks.length).toBe(1);
+      expect(activityBlocks[0].name).toBe('New Activity');
+    });
+
+    it('dispatches schedule-regenerated event on success', async () => {
+      const mockResult = {
+        success: true,
+        timeBlocks: [
+          { startTime: '10:40', endTime: '11:30', type: 'activity', name: 'Study', location: 'Lib' }
+        ]
+      };
+      vi.spyOn(apiClient, 'generateSchedule').mockResolvedValue(mockResult);
+      storageService.getRegenerationCount.mockReturnValue(0);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'wednesday';
+      el.classes = [];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const eventPromise = new Promise(resolve => {
+        el.addEventListener('schedule-regenerated', resolve);
+      });
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      const event = await eventPromise;
+      expect(event.detail.day).toBe('wednesday');
+      expect(event.detail.timeBlocks).toEqual(mockResult.timeBlocks);
+    });
+
+    it('dispatches regeneration-error event on API failure', async () => {
+      const mockResult = {
+        success: false,
+        error: { code: 'TIMEOUT', message: 'Request timed out' }
+      };
+      vi.spyOn(apiClient, 'generateSchedule').mockResolvedValue(mockResult);
+      storageService.getRegenerationCount.mockReturnValue(0);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'monday';
+      el.classes = [];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const eventPromise = new Promise(resolve => {
+        el.addEventListener('regeneration-error', resolve);
+      });
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      const event = await eventPromise;
+      expect(event.detail.error.code).toBe('TIMEOUT');
+    });
+
+    it('does not call API when limit is reached', async () => {
+      vi.spyOn(apiClient, 'generateSchedule').mockResolvedValue({ success: true, timeBlocks: [] });
+      storageService.getRegenerationCount.mockReturnValue(5);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'monday';
+      el.classes = [];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      await new Promise(resolve => setTimeout(resolve, 0));
+
+      expect(apiClient.generateSchedule).not.toHaveBeenCalled();
+    });
+
+    it('shows loading state during regeneration', async () => {
+      let resolveApi;
+      const apiPromise = new Promise(resolve => { resolveApi = resolve; });
+      vi.spyOn(apiClient, 'generateSchedule').mockReturnValue(apiPromise);
+      storageService.getRegenerationCount.mockReturnValue(0);
+
+      mount();
+      el.blocks = sampleBlocks;
+      el.day = 'monday';
+      el.classes = [];
+      el.preferences = { activities: ['study'], dietaryRestrictions: [], mealPreferences: [] };
+
+      const btn = el.shadowRoot.querySelector('.btn-regenerate');
+      btn.click();
+
+      // Loading should be visible immediately after click
+      await new Promise(resolve => setTimeout(resolve, 0));
+      const loadingEl = el.shadowRoot.querySelector('.loading-state');
+      expect(loadingEl.classList.contains('hidden')).toBe(false);
+
+      // Resolve the API call
+      resolveApi({ success: true, timeBlocks: [] });
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+
+    it('has 44px minimum touch target on regenerate button (Req 8.1)', () => {
+      mount();
+      el.blocks = sampleBlocks;
+      const styles = el.shadowRoot.querySelector('style').textContent;
+      expect(styles).toContain('min-height: 44px');
+      expect(styles).toContain('min-width: 44px');
+    });
+
+    it('tracks day and gapIndex properties', () => {
+      mount();
+      el.day = 'friday';
+      el.gapIndex = 3;
+      expect(el.day).toBe('friday');
+      expect(el.gapIndex).toBe(3);
+    });
+
+    it('rejects invalid day values', () => {
+      mount();
+      el.day = 'invalid';
+      expect(el.day).toBe('monday'); // Default value
+    });
+
+    it('defaults gapIndex to 0 for invalid values', () => {
+      mount();
+      el.gapIndex = -1;
+      expect(el.gapIndex).toBe(0);
+      el.gapIndex = 'abc';
+      expect(el.gapIndex).toBe(0);
     });
   });
 });

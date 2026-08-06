@@ -67,6 +67,12 @@ template.innerHTML = `
       border-radius: 6px;
       overflow: hidden;
       min-height: 40px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .time-block:hover {
+      transform: translateX(2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .time-block-header {

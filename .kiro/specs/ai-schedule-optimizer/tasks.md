@@ -247,7 +247,7 @@ Build a vanilla JS single-page application with Web Components that optimizes un
     - Render at minimum 600px width on desktop (≥768px viewport), full width on mobile (Req 7.4)
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
 
-- [ ] 13. Navigation and responsive layout (App Shell)
+- [x] 13. Navigation and responsive layout (App Shell)
   - [x] 13.1 Create App Shell and Navigation components
     - Create `/js/components/app-shell.js` as a Custom Element
     - Implement client-side routing between views: Schedule, Classes, Preferences
@@ -260,15 +260,15 @@ Build a vanilla JS single-page application with Web Components that optimizes un
     - Minimum 16px font, 44×44px touch targets (Req 8.1)
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
 
-  - [-] 13.2 Wire App Shell with index.html entry point
+  - [x] 13.2 Wire App Shell with index.html entry point
     - Update `index.html` to load ES module entry point
     - Create `/js/app.js` as main entry — register all custom elements, initialize app shell
     - Load stored state from localStorage on startup
     - Connect all components via custom events and shared state
     - _Requirements: 1.4, 2.4_
 
-- [ ] 14. Error handling UI
-  - [-] 14.1 Create ErrorDisplay component and error handling flow
+- [x] 14. Error handling UI
+  - [x] 14.1 Create ErrorDisplay component and error handling flow
     - Create `/js/components/error-display.js` as a Custom Element
     - Display contextual error messages in schedule display area
     - Show retry button for timeout and service errors (Req 9.1, 9.2)
@@ -283,8 +283,8 @@ Build a vanilla JS single-page application with Web Components that optimizes un
     - Simulate API errors; verify class schedule and preferences in storage remain unchanged after error handling
     - **Validates: Requirements 9.4**
 
-- [ ] 15. Schedule regeneration feature
-  - [~] 15.1 Implement schedule regeneration
+- [x] 15. Schedule regeneration feature
+  - [x] 15.1 Implement schedule regeneration
     - Add "Regenerate" button to ScheduleView component
     - On click: increment regeneration seed and call API with same inputs + new seed (Req 10.1)
     - Replace displayed schedule with newly generated one (Req 10.2)
@@ -292,10 +292,10 @@ Build a vanilla JS single-page application with Web Components that optimizes un
     - Show count indicator (e.g., "3/5 regenerations used")
     - _Requirements: 10.1, 10.2, 10.3_
 
-- [~] 16. Checkpoint - Full feature integration
+- [x] 16. Checkpoint - Full feature integration
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 17. Remaining property tests and integration polish
+- [x] 17. Remaining property tests and integration polish
   - [ ]* 17.1 Write property test for meal dietary restriction compliance (Property 11)
     - **Property 11: Meal blocks respect dietary restrictions**
     - Generate Meal_Blocks with user dietary restrictions; verify no restricted items in suggestions
@@ -306,7 +306,7 @@ Build a vanilla JS single-page application with Web Components that optimizes un
     - Generate schedules with ranked preferences and equal gaps; verify higher-ranked categories appear first
     - **Validates: Requirements 6.3**
 
-  - [~] 17.3 Final integration wiring and visual polish
+  - [x] 17.3 Final integration wiring and visual polish
     - Ensure all components communicate correctly via events
     - Verify day switching loads correct schedule from localStorage
     - Verify generate button sends correct day's classes to API
@@ -315,7 +315,7 @@ Build a vanilla JS single-page application with Web Components that optimizes un
     - Verify legend, color coding, and proportional heights work end-to-end
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 8.1, 8.2, 8.5_
 
-- [~] 18. Final checkpoint - Complete validation
+- [x] 18. Final checkpoint - Complete validation
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

@@ -1,0 +1,10 @@
+﻿
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/services/apiClient.test.js (14 tests) 16ms
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  13:11:29
+   Duration  2.14s (transform 39ms, setup 0ms, collect 54ms, tests 16ms, environment 1.47s, prepare 184ms)
+

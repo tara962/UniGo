@@ -23,7 +23,7 @@
       background-color: #f8fafc;
     }
 
-    /* Ensure no horizontal scrollbar at any supported viewport width (320px-1920px) */
+    /* Ensure no horizontal scrollbar at any supported viewport width (320px-1920px) (Req 8.2) */
     body {
       max-width: 100vw;
     }
@@ -32,6 +32,36 @@
     app-shell {
       display: block;
       min-height: 100vh;
+    }
+
+    /* Global minimum touch-target size (Req 8.1) */
+    button, a, [role="button"], input, select, textarea {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    /* Global minimum font size (Req 8.1) */
+    body, button, input, select, textarea {
+      font-size: 16px;
+    }
+
+    /* Responsive: single-column on mobile (Req 8.2) */
+    @media (max-width: 767px) {
+      body {
+        font-size: 16px;
+      }
+    }
+
+    /* Responsive: multi-column capable on desktop (Req 8.2) */
+    @media (min-width: 768px) {
+      body {
+        font-size: 16px;
+      }
+    }
+
+    /* Smooth transitions for page-level state changes */
+    app-shell {
+      transition: opacity 0.2s ease;
     }
   </style>
 </head>

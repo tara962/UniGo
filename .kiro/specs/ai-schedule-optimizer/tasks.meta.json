@@ -480,6 +480,11 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786046041443
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046483352
       }
     ],
     "14.1 Create ErrorDisplay component and error handling flow": [
@@ -497,6 +502,11 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786046042280
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046483986
       }
     ],
     "15.1 Implement schedule regeneration": [
@@ -509,6 +519,16 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786043160978
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046489417
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046976446
       }
     ],
     "16. Checkpoint - Full feature integration": [
@@ -521,6 +541,16 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786043161282
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046989368
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786047204164
       }
     ],
     "17.3 Final integration wiring and visual polish": [
@@ -533,6 +563,16 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786043161580
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786047208741
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786047792986
       }
     ],
     "18. Final checkpoint - Complete validation": [
@@ -545,6 +585,16 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786043161855
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786047798279
+      },
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786047991580
       }
     ],
     "1. Project setup and core infrastructure": [
@@ -608,6 +658,34 @@
         "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
         "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
         "timestamp": 1786046035645
+      }
+    ],
+    "13. Navigation and responsive layout (App Shell)": [
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046483519
+      }
+    ],
+    "14. Error handling UI": [
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046484121
+      }
+    ],
+    "15. Schedule regeneration feature": [
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786046976712
+      }
+    ],
+    "17. Remaining property tests and integration polish": [
+      {
+        "executionId": "9473c7ae-bd3e-42bb-b9ad-100860626136",
+        "chatSessionId": "sess_8a1b3cca-d3ea-419a-9741-d03726397a20",
+        "timestamp": 1786047793148
       }
     ]
   }

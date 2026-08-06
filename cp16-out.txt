@@ -1,0 +1,43 @@
+
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/validators/timeBlockValidator.test.js (47 tests) 38ms
+ ✓ js/components/time-block-renderer.test.js (22 tests) 237ms
+ ✓ js/services/responseParser.test.js (27 tests) 43ms
+ ✓ js/models/models.test.js (32 tests) 36ms
+ ✓ js/utils/time.test.js (55 tests) 130ms
+ ✓ js/components/error-display.test.js (39 tests) 767ms
+ ✓ js/services/apiClient.test.js (14 tests) 40ms
+ ✓ lambda/index.test.mjs (51 tests) 124ms
+ ✓ js/components/user-preferences-input.test.js (30 tests) 2263ms
+   ✓ UserPreferencesInput > rendering > renders as a custom element with shadow DOM 349ms
+ ✓ js/components/schedule-view.test.js (62 tests) 2335ms
+ ✓ js/components/class-schedule-input.test.js (25 tests) 8045ms
+   ✓ ClassScheduleInput > registers as a custom element 490ms
+   ✓ ClassScheduleInput > adds a class when form is submitted with valid data 307ms
+   ✓ ClassScheduleInput > dispatches class-added event when a class is added 338ms
+   ✓ ClassScheduleInput > removes a class and dispatches class-removed event 302ms
+   ✓ ClassScheduleInput > does not allow adding beyond 30 classes 362ms
+   ✓ ClassScheduleInput > sets classes via setter and renders them 364ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > displays inline error when end time is equal to start time (Req 1.5) 358ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > displays inline error when end time is earlier than start time (Req 1.5) 433ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > displays inline error identifying conflicting class names and times for overlaps (Req 1.3) 358ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > blocks save until overlap conflict is resolved (Req 1.2) 554ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > persists to localStorage on successful add (Req 1.4) 391ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > persists removal to localStorage 552ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > restores classes from localStorage on page load (Req 1.4) 606ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > does not persist to localStorage when validation fails 318ms
+ ✓ js/services/scheduleLogic.test.js (23 tests) 21ms
+ ✓ js/validators/classValidator.test.js (25 tests) 23ms
+ ✓ js/app.test.js (15 tests) 102ms
+ ✓ js/validators/overlapDetector.test.js (17 tests) 18ms
+ ✓ js/services/storageService.test.js (16 tests) 23ms
+ ✓ js/components/app-shell.test.js (21 tests) 931ms
+ ✓ js/components/navigation.test.js (25 tests) 630ms
+ ✓ js/setup.test.js (2 tests) 10ms
+
+ Test Files  19 passed (19)
+      Tests  548 passed (548)
+   Start at  13:14:18
+   Duration  24.67s (transform 1.57s, setup 0ms, collect 5.98s, tests 15.82s, environment 166.58s, prepare 18.58s)
+

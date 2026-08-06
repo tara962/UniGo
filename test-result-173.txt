@@ -1,0 +1,79 @@
+
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/validators/timeBlockValidator.test.js (47 tests) 51ms
+ ✓ js/utils/time.test.js (55 tests) 42ms
+ ✓ js/models/models.test.js (32 tests) 43ms
+ ✓ js/services/responseParser.test.js (27 tests) 53ms
+ ✓ js/services/apiClient.test.js (14 tests) 58ms
+stderr | lambda/index.test.mjs > handler > returns 504 on Bedrock timeout
+[Lambda] Bedrock timeout: Request timed out
+
+stderr | lambda/index.test.mjs > handler > returns 502 on Bedrock service error
+[Lambda] Bedrock invocation error: Error: Service unavailable
+    at C:\UniGo\lambda\index.test.mjs:482:49
+    at file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:146:14
+    at file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:533:11
+    at runWithTimeout (file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:39:7)
+    at runTest (file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:1056:17)
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at runSuite (file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:1205:15)
+    at runSuite (file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:1205:15)
+    at runFiles (file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:1262:5)
+    at startTests (file:///C:/UniGo/node_modules/@vitest/runner/dist/index.js:1271:3)
+
+stderr | lambda/index.test.mjs > handler > returns 502 on unparseable Bedrock response
+[Lambda] Parse failure: No JSON array found in response Raw response: This is not JSON at all and has no arrays
+
+stderr | lambda/index.test.mjs > handler > returns partial valid blocks when some are invalid (Req 3.5)
+[Lambda] Block validation warnings: [ 'Block "Outside Gap" (08:00-08:30) is not within any time gap' ]
+
+ ✓ lambda/index.test.mjs (51 tests) 185ms
+ ✓ js/components/time-block-renderer.test.js (22 tests) 413ms
+ ✓ js/components/error-display.test.js (39 tests) 585ms
+ ✓ js/components/user-preferences-input.test.js (30 tests) 2334ms
+   ✓ UserPreferencesInput > rendering > renders as a custom element with shadow DOM 333ms
+ ❯ js/components/schedule-view.test.js (62 tests | 1 failed) 3144ms
+   × ScheduleView > regeneration controls (Req 10.1, 10.2, 10.3) > replaces displayed schedule after successful regeneration (Req 10.2) 147ms
+     → expected +0 to be 1 // Object.is equality
+ ✓ js/components/class-schedule-input.test.js (25 tests) 6849ms
+   ✓ ClassScheduleInput > registers as a custom element 507ms
+   ✓ ClassScheduleInput > renders a shadow DOM with a form 362ms
+   ✓ ClassScheduleInput > dispatches class-added event when a class is added 351ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > persists removal to localStorage 334ms
+   ✓ ClassScheduleInput - Validation and Error Display (Task 5.2) > restores classes from localStorage on page load (Req 1.4) 365ms
+ ✓ js/services/storageService.test.js (16 tests) 22ms
+ ✓ js/services/scheduleLogic.test.js (23 tests) 18ms
+ ✓ js/app.test.js (15 tests) 20ms
+ ✓ js/validators/overlapDetector.test.js (17 tests) 20ms
+ ✓ js/validators/classValidator.test.js (25 tests) 25ms
+ ✓ js/components/navigation.test.js (25 tests) 1025ms
+ ✓ js/components/app-shell.test.js (21 tests) 961ms
+ ✓ js/setup.test.js (2 tests) 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  js/components/schedule-view.test.js > ScheduleView > regeneration controls (Req 10.1, 10.2, 10.3) > replaces displayed schedule after successful regeneration (Req 10.2)
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ js/components/schedule-view.test.js:544:34
+    542|       const classBlocks = el.blocks.filter(b => b.type === 'class');
+    543|       const activityBlocks = el.blocks.filter(b => b.type === 'activit…
+    544|       expect(classBlocks.length).toBe(1); // Original class block pres…
+       |                                  ^
+    545|       expect(activityBlocks.length).toBe(1);
+    546|       expect(activityBlocks[0].name).toBe('New Activity');
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+ Test Files  1 failed | 18 passed (19)
+      Tests  1 failed | 547 passed (548)
+   Start at  13:21:31
+   Duration  20.59s (transform 1.03s, setup 0ms, collect 6.35s, tests 15.85s, environment 144.39s, prepare 12.76s)
+

@@ -136,9 +136,10 @@ export class AppShell extends HTMLElement {
     if (nav) {
       nav.day = this._currentDay;
     }
-    // Notify schedule-view of day change
+    // Notify schedule-view of day change via property and attribute
     const scheduleView = this.shadowRoot.querySelector('schedule-view');
-    if (scheduleView && scheduleView.setAttribute) {
+    if (scheduleView) {
+      scheduleView.day = this._currentDay;
       scheduleView.setAttribute('day', this._currentDay);
     }
   }
@@ -216,6 +217,12 @@ export class AppShell extends HTMLElement {
       .view-panel {
         display: block;
         width: 100%;
+        animation: viewFadeIn 0.25s ease-out;
+      }
+
+      @keyframes viewFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
 
       /* Mobile: single-column layout */

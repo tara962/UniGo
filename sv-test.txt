@@ -1,0 +1,10 @@
+
+ RUN  v2.1.8 c:/UniGo
+
+ ✓ js/components/schedule-view.test.js (62 tests) 902ms
+
+ Test Files  1 passed (1)
+      Tests  62 passed (62)
+   Start at  13:23:15
+   Duration  4.94s (transform 165ms, setup 0ms, collect 322ms, tests 902ms, environment 2.99s, prepare 301ms)
+
