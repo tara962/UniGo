@@ -226,8 +226,6 @@
   });
 
   // === SHOW CURRENT USER'S LOCATION ON MAP ===
-  const locationEnabled = localStorage.getItem('unigo-location-enabled');
-
   function placeUserMarker(lat, lng) {
     const userName = localStorage.getItem('unigo-name') || 'You';
     const userIcon = L.divIcon({
@@ -267,34 +265,26 @@
     map.fitBounds(bounds.pad(0.2));
   }
 
-  if (locationEnabled === 'true') {
-    // Try live geolocation first, fall back to stored coordinates
-    if (navigator.geolocation && window.location.protocol !== 'file:') {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          localStorage.setItem('unigo-user-lat', lat.toString());
-          localStorage.setItem('unigo-user-lng', lng.toString());
-          placeUserMarker(lat, lng);
-        },
-        () => {
-          // Geolocation denied/failed — fall back to stored coordinates
-          const storedLat = localStorage.getItem('unigo-user-lat');
-          const storedLng = localStorage.getItem('unigo-user-lng');
-          if (storedLat && storedLng) {
-            placeUserMarker(parseFloat(storedLat), parseFloat(storedLng));
-          }
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
-    } else {
-      // Geolocation not available (file:// protocol or no API) — use stored coordinates
-      const storedLat = localStorage.getItem('unigo-user-lat');
-      const storedLng = localStorage.getItem('unigo-user-lng');
-      if (storedLat && storedLng) {
-        placeUserMarker(parseFloat(storedLat), parseFloat(storedLng));
-      }
-    }
+  // Always attempt geolocation on HTTPS (CloudFront provides HTTPS)
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        localStorage.setItem('unigo-user-lat', lat.toString());
+        localStorage.setItem('unigo-user-lng', lng.toString());
+        localStorage.setItem('unigo-location-enabled', 'true');
+        placeUserMarker(lat, lng);
+      },
+      () => {
+        // Geolocation denied/failed — try stored coordinates
+        const storedLat = localStorage.getItem('unigo-user-lat');
+        const storedLng = localStorage.getItem('unigo-user-lng');
+        if (storedLat && storedLng) {
+          placeUserMarker(parseFloat(storedLat), parseFloat(storedLng));
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
   }
 })();
