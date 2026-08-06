@@ -159,6 +159,12 @@ Resources:
               Model: OptimizeRequestModel
               Required: true
               ValidateBody: true
+        OptimizeScheduleCORS:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ScheduleOptimizerApi
+            Path: /optimize
+            Method: OPTIONS
 
   # --- Lambda Function Log Group ---
   ScheduleOptimizerLogGroup:

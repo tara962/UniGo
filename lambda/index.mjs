@@ -483,6 +483,11 @@ export function computeEnrichedGaps(classes) {
  * @returns {object} API Gateway response
  */
 export async function handler(event) {
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return buildResponse(200, {});
+  }
+
   // Parse request body
   let body;
   try {
