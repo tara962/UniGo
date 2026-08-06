@@ -1,0 +1,10 @@
+﻿
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/components/user-preferences-input.test.js (30 tests) 588ms
+
+ Test Files  1 passed (1)
+      Tests  30 passed (30)
+   Start at  12:08:23
+   Duration  16.27s (transform 272ms, setup 0ms, collect 182ms, tests 588ms, environment 5.67s, prepare 8.40s)
+

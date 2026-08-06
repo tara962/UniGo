@@ -1,0 +1,20 @@
+{
+  "name": "unigo-lambda-optimizer",
+  "version": "1.0.0",
+  "description": "Lambda function for AI Schedule Optimizer - Bedrock integration",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.500.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "private": true
+}

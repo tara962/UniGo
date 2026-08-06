@@ -1,0 +1,27 @@
+STATUS: 0
+STDOUT:
+
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > successful responses > returns success with parsed TimeBlock array on valid response
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > successful responses > sends correct request body to /optimize
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > successful responses > uses custom baseUrl when provided
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > successful responses > returns empty timeBlocks array on valid response with no blocks
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > successful responses > handles classes without toJSON method (plain objects)
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > timeout handling > returns TIMEOUT error when request exceeds 30 seconds
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > HTTP error handling > returns backend error code when response contains structured error
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > HTTP error handling > returns SERVICE_ERROR when HTTP error has no parseable body
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > HTTP error handling > returns SERVICE_ERROR when error body lacks error field
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > parse error handling > returns PARSE_ERROR when response JSON is invalid
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > parse error handling > returns PARSE_ERROR when response is missing timeBlocks array
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > parse error handling > returns PARSE_ERROR when timeBlocks is not an array
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > network error handling > returns NETWORK_ERROR on fetch failure
+ ✓ js/services/apiClient.test.js > apiClient - generateSchedule > network error handling > returns NETWORK_ERROR with fallback message when error has no message
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  12:06:31
+   Duration  3.45s (transform 56ms, setup 0ms, collect 79ms, tests 24ms, environment 2.08s, prepare 306ms)
+
+
+STDERR:

@@ -1,0 +1,10 @@
+﻿
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/services/scheduleLogic.test.js (23 tests) 16ms
+
+ Test Files  1 passed (1)
+      Tests  23 passed (23)
+   Start at  12:03:02
+   Duration  4.90s (transform 68ms, setup 0ms, collect 78ms, tests 16ms, environment 3.36s, prepare 568ms)
+

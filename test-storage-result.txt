@@ -1,0 +1,10 @@
+
+ RUN  v2.1.8 C:/UniGo
+
+ ✓ js/services/storageService.test.js (16 tests) 11ms
+
+ Test Files  1 passed (1)
+      Tests  16 passed (16)
+   Start at  12:15:59
+   Duration  4.66s (transform 71ms, setup 0ms, collect 96ms, tests 11ms, environment 3.33s, prepare 376ms)
+
