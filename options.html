@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniGo - Options</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" aria-label="Toggle sidebar">
+        <div class="menu-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <div class="logo">UniGo</div>
+    </div>
+    <div class="header-right">
+      <a href="options.html" class="settings-btn" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-profile">
+      <img class="sidebar-avatar-img" id="sidebar-avatar" src="" alt="Profile" style="display:none;">
+      <div class="sidebar-avatar-default" id="sidebar-avatar-default">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </div>
+      <span class="sidebar-username" id="sidebar-username">User</span>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="index.html"><span class="nav-icon">&#128218;</span> Study Buddy</a></li>
+      <li><a href="food.html"><span class="nav-icon">&#127828;</span> Food Finder</a></li>
+      <li><a href="schedule.html"><span class="nav-icon">&#128197;</span> My Schedule</a></li>
+      <li>
+        <a href="options.html" class="active">
+          <span class="nav-icon nav-icon-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></span>
+          Options
+        </a>
+      </li>
+      <li><a href="#" id="sign-out-link" class="sign-out-link"><span class="nav-icon">&#128682;</span> Sign Out</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="options-page">
+
+      <!-- Profile Photo Upload -->
+      <div class="profile-section">
+        <div class="avatar-upload">
+          <label for="avatar-input" class="avatar-circle" id="avatar-circle-label">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </label>
+          <input type="file" id="avatar-input" accept="image/*">
+        </div>
+        <div class="profile-upload-info">
+          Upload Photo
+          <span>Accepts laptop files (JPG, PNG, GIF)</span>
+        </div>
+      </div>
+
+      <!-- Profile Settings -->
+      <div class="settings-card">
+        <h3>Profile Settings</h3>
+        <div class="settings-grid">
+          <div class="setting-field">
+            <label>Display Name</label>
+            <input type="text" id="display-name-input" placeholder="Your name">
+          </div>
+          <div class="setting-field">
+            <label>Year of Study</label>
+            <select><option value="">Select...</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>5th Year+</option><option>Graduate</option></select>
+          </div>
+          <div class="setting-field">
+            <label>Degree</label>
+            <select><option value="">Select...</option><option>Bachelor of Science</option><option>Bachelor of Arts</option><option>Bachelor of Commerce</option><option>Bachelor of Engineering</option><option>Master's</option><option>PhD</option></select>
+          </div>
+          <div class="setting-field">
+            <label>Major</label>
+            <input type="text" placeholder="e.g. Computer Science">
+          </div>
+          <div class="setting-field">
+            <label>Minor (Optional)</label>
+            <input type="text" placeholder="e.g. Statistics">
+          </div>
+          <div class="setting-field">
+            <label>Gender</label>
+            <select><option value="">Select...</option><option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option></select>
+          </div>
+        </div>
+
+        <!-- Location Toggle -->
+        <div class="location-toggle-section">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <span class="toggle-label">Enable Location Sharing</span>
+              <span class="toggle-desc">Allow other UniGo users to see your study location</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="location-toggle">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Preferences -->
+      <div class="preferences-section">
+        <h3>User Preferences</h3>
+        <div class="preferences-grid">
+
+          <!-- Methods -->
+          <div class="pref-card">
+            <h4>Methods</h4>
+            <div class="pref-tags">
+              <span class="pref-tag">Pomodoro</span>
+              <span class="pref-tag">Deep Work</span>
+              <span class="pref-tag">Flashcards</span>
+              <span class="pref-tag">Group Study</span>
+              <span class="pref-tag">Solo</span>
+              <span class="pref-tag">Active Recall</span>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="pref-card">
+            <h4>Location</h4>
+            <div class="pref-tags">
+              <span class="pref-tag">Daylight</span>
+              <span class="pref-tag">Dark Lit</span>
+              <span class="pref-tag">Windows</span>
+              <span class="pref-tag">Enclosed</span>
+              <span class="pref-tag">High Floor</span>
+              <span class="pref-tag">Basement</span>
+            </div>
+          </div>
+
+          <!-- Habits -->
+          <div class="pref-card">
+            <h4>Habits</h4>
+            <div class="pref-tags">
+              <span class="pref-tag">Early Riser</span>
+              <span class="pref-tag">Night Owl</span>
+              <span class="pref-tag">Morning Study</span>
+              <span class="pref-tag">Afternoon Study</span>
+              <span class="pref-tag">Evening Study</span>
+              <span class="pref-tag">Late Night</span>
+            </div>
+          </div>
+
+          <!-- Courses (redesigned) -->
+          <div class="pref-card courses-card">
+            <h4>My Courses</h4>
+            <div class="courses-list" id="courses-container"></div>
+            <div class="course-add-section">
+              <input type="text" id="course-input" class="course-input" placeholder="Add a course (e.g. CPSC 221)">
+              <button class="course-add-btn" id="course-add-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
