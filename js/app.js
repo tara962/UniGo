@@ -74,44 +74,61 @@ function loadStoredState() {
 }
 
 /**
+ * Tracked event listener references for cleanup.
+ * @type {Array<{event: string, handler: Function}>}
+ */
+const _listeners = [];
+
+/**
  * Set up event listeners for cross-component communication.
  * Components dispatch custom events (bubbling + composed) that
  * propagate through shadow DOM boundaries.
  */
 function setupEventListeners() {
-  // Listen for class list changes (from class-schedule-input)
-  document.addEventListener('classes-updated', (e) => {
-    appState.classes = e.detail?.classes || [];
-  });
+  // Remove any previously registered listeners to avoid duplicates
+  teardownEventListeners();
 
-  // Listen for preferences changes (from user-preferences-input)
-  document.addEventListener('preferences-updated', (e) => {
-    appState.preferences = e.detail?.preferences || null;
-  });
+  const handlers = [
+    ['classes-updated', (e) => {
+      appState.classes = e.detail?.classes || [];
+    }],
+    ['preferences-updated', (e) => {
+      appState.preferences = e.detail?.preferences || null;
+    }],
+    ['schedule-generated', (e) => {
+      const { day, schedule } = e.detail || {};
+      if (day && schedule) {
+        appState.schedules[day] = schedule;
+      }
+    }],
+    ['day-change', (e) => {
+      const day = e.detail?.day;
+      if (day) {
+        appState.currentDay = day;
+      }
+    }],
+    ['nav-change', (e) => {
+      const route = e.detail?.route;
+      if (route) {
+        appState.currentRoute = route;
+      }
+    }]
+  ];
 
-  // Listen for schedule generation results
-  document.addEventListener('schedule-generated', (e) => {
-    const { day, schedule } = e.detail || {};
-    if (day && schedule) {
-      appState.schedules[day] = schedule;
-    }
-  });
+  for (const [event, handler] of handlers) {
+    document.addEventListener(event, handler);
+    _listeners.push({ event, handler });
+  }
+}
 
-  // Listen for day changes (from navigation)
-  document.addEventListener('day-change', (e) => {
-    const day = e.detail?.day;
-    if (day) {
-      appState.currentDay = day;
-    }
-  });
-
-  // Listen for route changes (from navigation)
-  document.addEventListener('nav-change', (e) => {
-    const route = e.detail?.route;
-    if (route) {
-      appState.currentRoute = route;
-    }
-  });
+/**
+ * Remove all event listeners (for testing/cleanup).
+ */
+function teardownEventListeners() {
+  for (const { event, handler } of _listeners) {
+    document.removeEventListener(event, handler);
+  }
+  _listeners.length = 0;
 }
 
 /**
@@ -123,9 +140,20 @@ export function getAppState() {
 }
 
 /**
+ * Reset application state to defaults (for testing purposes).
+ */
+export function resetAppState() {
+  appState.classes = [];
+  appState.preferences = null;
+  appState.currentDay = 'monday';
+  appState.currentRoute = 'schedule';
+  appState.schedules = {};
+}
+
+/**
  * Exported for testing: the initialization function.
  */
-export { initApp, loadStoredState, setupEventListeners };
+export { initApp, loadStoredState, setupEventListeners, teardownEventListeners };
 
 // Initialize when the DOM is ready
 if (document.readyState === 'loading') {
