@@ -3,7 +3,7 @@ import { TimeBlock } from '../models/TimeBlock.js';
 /**
  * Default base URL for the API. Can be overridden via the baseUrl parameter.
  */
-const DEFAULT_BASE_URL = '';
+const DEFAULT_BASE_URL = 'https://bedrock-api-key-=.execute-api.us-east-1.amazonaws.com/prod';
 
 /**
  * Timeout duration in milliseconds (30 seconds per Req 9.2).

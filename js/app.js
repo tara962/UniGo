@@ -101,29 +101,46 @@ document.addEventListener('DOMContentLoaded', () => {
   if (locationToggle) {
     const savedLocation = localStorage.getItem('unigo-location-enabled');
     locationToggle.checked = savedLocation === 'true';
+
+    // If location was previously enabled, keep it updated in the background
+    if (savedLocation === 'true' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          localStorage.setItem('unigo-user-lat', position.coords.latitude.toString());
+          localStorage.setItem('unigo-user-lng', position.coords.longitude.toString());
+        },
+        () => {} // Silently fail on background refresh
+      );
+    }
+
     locationToggle.addEventListener('change', () => {
       if (locationToggle.checked) {
-        // Check if geolocation is available (requires https or localhost, not file://)
-        if (navigator.geolocation && window.location.protocol !== 'file:') {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              localStorage.setItem('unigo-user-lat', position.coords.latitude.toString());
-              localStorage.setItem('unigo-user-lng', position.coords.longitude.toString());
-              localStorage.setItem('unigo-location-enabled', 'true');
-            },
-            () => {
-              locationToggle.checked = false;
-              alert('Location access denied. Please enable location in your browser settings.');
-              localStorage.setItem('unigo-location-enabled', 'false');
-            }
-          );
-        } else {
-          // Running on file:// protocol - use default UBC campus location as fallback
-          // In production this would use actual GPS, but for local testing we simulate
-          localStorage.setItem('unigo-user-lat', '49.26200');
-          localStorage.setItem('unigo-user-lng', '-123.24800');
-          localStorage.setItem('unigo-location-enabled', 'true');
+        if (!navigator.geolocation) {
+          locationToggle.checked = false;
+          alert('Geolocation is not supported by your browser.');
+          localStorage.setItem('unigo-location-enabled', 'false');
+          return;
         }
+
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            localStorage.setItem('unigo-user-lat', position.coords.latitude.toString());
+            localStorage.setItem('unigo-user-lng', position.coords.longitude.toString());
+            localStorage.setItem('unigo-location-enabled', 'true');
+          },
+          (error) => {
+            locationToggle.checked = false;
+            localStorage.setItem('unigo-location-enabled', 'false');
+            if (error.code === error.PERMISSION_DENIED) {
+              alert('Location access denied. Please enable location permissions in your browser settings.');
+            } else if (error.code === error.POSITION_UNAVAILABLE) {
+              alert('Location unavailable. Make sure location services are enabled on your device.');
+            } else {
+              alert('Could not get your location. Please try again.');
+            }
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+        );
       } else {
         localStorage.removeItem('unigo-user-lat');
         localStorage.removeItem('unigo-user-lng');

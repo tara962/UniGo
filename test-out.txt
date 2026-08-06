@@ -1,0 +1,109 @@
+STATUS: 1\nSTDOUT:\n
+ RUN  v2.1.8 c:/UniGo
+
+ ❯ js/app.test.js (15 tests | 15 failed) 13ms
+   × app.js - Application Entry Point > initApp > should call loadStoredState and setup event listeners without errors 6ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > loadStoredState > should load classes from localStorage via storageService 1ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > loadStoredState > should load preferences from localStorage via storageService 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > loadStoredState > should load schedules for all weekdays 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadClasses throws 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadPreferences throws 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadSchedule throws for a day 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > setupEventListeners > should update appState.classes on classes-updated event 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > setupEventListeners > should update appState.preferences on preferences-updated event 1ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > setupEventListeners > should update appState.schedules on schedule-generated event 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > setupEventListeners > should update appState.currentDay on day-change event 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > setupEventListeners > should update appState.currentRoute on nav-change event 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > setupEventListeners > should handle missing detail in events gracefully 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > getAppState > should return a copy of the state, not the original reference 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+   × app.js - Application Entry Point > getAppState > should have correct initial state structure 0ms
+     → teardownEventListeners is not a function
+     → teardownEventListeners is not a function
+
+ Test Files  1 failed (1)
+      Tests  15 failed (15)
+   Start at  14:01:47
+   Duration  3.58s (transform 63ms, setup 0ms, collect 70ms, tests 13ms, environment 2.73s, prepare 231ms)
+
+\nSTDERR:\n⎯⎯⎯⎯⎯⎯ Failed Tests 15 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  js/app.test.js > app.js - Application Entry Point > initApp > should call loadStoredState and setup event listeners without errors
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should load classes from localStorage via storageService
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should load preferences from localStorage via storageService
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should load schedules for all weekdays
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadClasses throws
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadPreferences throws
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadSchedule throws for a day
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.classes on classes-updated event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.preferences on preferences-updated event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.schedules on schedule-generated event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.currentDay on day-change event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.currentRoute on nav-change event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should handle missing detail in events gracefully
+ FAIL  js/app.test.js > app.js - Application Entry Point > getAppState > should return a copy of the state, not the original reference
+ FAIL  js/app.test.js > app.js - Application Entry Point > getAppState > should have correct initial state structure
+TypeError: teardownEventListeners is not a function
+ ❯ js/app.test.js:24:5
+     22|   beforeEach(() => {
+     23|     vi.clearAllMocks();
+     24|     teardownEventListeners();
+       |     ^
+     25|     resetAppState();
+     26|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/30]⎯
+
+ FAIL  js/app.test.js > app.js - Application Entry Point > initApp > should call loadStoredState and setup event listeners without errors
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should load classes from localStorage via storageService
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should load preferences from localStorage via storageService
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should load schedules for all weekdays
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadClasses throws
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadPreferences throws
+ FAIL  js/app.test.js > app.js - Application Entry Point > loadStoredState > should handle errors gracefully when loadSchedule throws for a day
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.classes on classes-updated event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.preferences on preferences-updated event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.schedules on schedule-generated event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.currentDay on day-change event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should update appState.currentRoute on nav-change event
+ FAIL  js/app.test.js > app.js - Application Entry Point > setupEventListeners > should handle missing detail in events gracefully
+ FAIL  js/app.test.js > app.js - Application Entry Point > getAppState > should return a copy of the state, not the original reference
+ FAIL  js/app.test.js > app.js - Application Entry Point > getAppState > should have correct initial state structure
+TypeError: teardownEventListeners is not a function
+ ❯ js/app.test.js:29:5
+     27| 
+     28|   afterEach(() => {
+     29|     teardownEventListeners();
+       |     ^
+     30|   });
+     31| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/30]⎯
+
