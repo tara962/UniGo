@@ -4,8 +4,6 @@ Description: >
   UniGo AI Schedule Optimizer - Serverless backend for optimizing university
   student schedules using Amazon Bedrock (Claude 3 Haiku).
 
-# Requirements: 3.1 - AI Schedule Generation via Bedrock API
-
 Globals:
   Function:
     Timeout: 30
@@ -22,107 +20,37 @@ Parameters:
       - prod
     Description: Deployment stage
 
-  AllowedOrigin:
-    Type: String
-    Default: '*'
-    Description: >
-      Allowed CORS origin for the frontend. Use '*' for development
-      or set to the specific frontend domain in production.
-
   BedrockRegion:
     Type: String
     Default: us-east-1
     Description: AWS region for Bedrock API calls
 
 Resources:
-  # --- API Gateway ---
   ScheduleOptimizerApi:
     Type: AWS::Serverless::Api
     Properties:
       Name: !Sub 'unigo-schedule-optimizer-${Stage}'
       StageName: !Ref Stage
-      # 30 second timeout for API Gateway (Req 9.2)
       EndpointConfiguration:
         Type: REGIONAL
       Cors:
-        AllowMethods: "'POST, OPTIONS'"
-        AllowHeaders: "'Content-Type'"
-        AllowOrigin: !Sub "'${AllowedOrigin}'"
-      # Request body validation via model
-      Models:
-        OptimizeRequestModel:
-          type: object
-          required:
-            - day
-            - classes
-            - preferences
-          properties:
-            day:
-              type: string
-              enum:
-                - monday
-                - tuesday
-                - wednesday
-                - thursday
-                - friday
-            classes:
-              type: array
-              items:
-                type: object
-                required:
-                  - name
-                  - startTime
-                  - endTime
-                properties:
-                  name:
-                    type: string
-                    minLength: 1
-                    maxLength: 100
-                  day:
-                    type: string
-                  startTime:
-                    type: string
-                    pattern: '^([01]\\d|2[0-3]):[0-5]\\d$'
-                  endTime:
-                    type: string
-                    pattern: '^([01]\\d|2[0-3]):[0-5]\\d$'
-                  location:
-                    type: string
-            preferences:
-              type: object
-              required:
-                - activities
-              properties:
-                activities:
-                  type: array
-                  minItems: 1
-                  items:
-                    type: string
-                dietaryRestrictions:
-                  type: array
-                  items:
-                    type: string
-                mealPreferences:
-                  type: array
-                  items:
-                    type: string
-            regenerationSeed:
-              type: number
+        AllowMethods: "'POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+        AllowOrigin: "'*'"
       GatewayResponses:
         DEFAULT_4XX:
           ResponseParameters:
             Headers:
-              Access-Control-Allow-Origin: !Sub "'${AllowedOrigin}'"
-              Access-Control-Allow-Headers: "'Content-Type'"
-              Access-Control-Allow-Methods: "'POST, OPTIONS'"
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              Access-Control-Allow-Methods: "'POST,OPTIONS'"
         DEFAULT_5XX:
           ResponseParameters:
             Headers:
-              Access-Control-Allow-Origin: !Sub "'${AllowedOrigin}'"
-              Access-Control-Allow-Headers: "'Content-Type'"
-              Access-Control-Allow-Methods: "'POST, OPTIONS'"
+              Access-Control-Allow-Origin: "'*'"
+              Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              Access-Control-Allow-Methods: "'POST,OPTIONS'"
 
-  # --- Lambda Function ---
   ScheduleOptimizerFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -139,7 +67,6 @@ Resources:
         Variables:
           AWS_REGION_BEDROCK: !Ref BedrockRegion
           STAGE: !Ref Stage
-          ALLOWED_ORIGIN: !Ref AllowedOrigin
       Policies:
         - Statement:
             - Sid: BedrockInvokeModel
@@ -155,18 +82,7 @@ Resources:
             RestApiId: !Ref ScheduleOptimizerApi
             Path: /optimize
             Method: POST
-            RequestModel:
-              Model: OptimizeRequestModel
-              Required: true
-              ValidateBody: true
-        OptimizeScheduleCORS:
-          Type: Api
-          Properties:
-            RestApiId: !Ref ScheduleOptimizerApi
-            Path: /optimize
-            Method: OPTIONS
 
-  # --- Lambda Function Log Group ---
   ScheduleOptimizerLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
