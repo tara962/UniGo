@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniGo - Study Buddy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" aria-label="Toggle sidebar">
+        <div class="menu-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="logo">UniGo</div>
+    </div>
+    <div class="header-right">
+      <a href="options.html" class="settings-btn" aria-label="Settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-profile">
+      <img class="sidebar-avatar-img" id="sidebar-avatar" src="" alt="Profile" style="display:none;">
+      <div class="sidebar-avatar-default" id="sidebar-avatar-default">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <span class="sidebar-username" id="sidebar-username">User</span>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="index.html" class="active"><span class="nav-icon">&#128218;</span> Study Buddy</a></li>
+      <li><a href="food.html"><span class="nav-icon">&#127828;</span> Food Finder</a></li>
+      <li><a href="schedule.html"><span class="nav-icon">&#128197;</span> My Schedule</a></li>
+      <li><a href="scheduler.html"><span class="nav-icon">&#10024;</span> Optimize Schedule</a></li>
+      <li>
+        <a href="options.html">
+          <span class="nav-icon nav-icon-svg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </span>
+          Options
+        </a>
+      </li>
+      <li><a href="#" id="sign-out-link" class="sign-out-link"><span class="nav-icon">&#128682;</span> Sign Out</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overlay for mobile -->
+  <div class="sidebar-overlay"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="map-container">
+      <div id="map"></div>
+
+      <!-- Vibe Legend -->
+      <div class="map-legend">
+        <h4>Vibe Meter</h4>
+        <p class="legend-subtitle">Based on UniGo users online</p>
+        <div class="legend-item"><span class="legend-dot quiet"></span> Quiet (few users)</div>
+        <div class="legend-item"><span class="legend-dot moderate"></span> Moderate</div>
+        <div class="legend-item"><span class="legend-dot busy"></span> Busy (many users)</div>
+      </div>
+
+      <!-- Campus Security -->
+      <a id="campus-security-btn" href="https://communitysafety.ubc.ca/" target="_blank" rel="noopener noreferrer" class="campus-security">&#128274; Campus Security</a>
+    </div>
+  </main>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Leaflet Heat Plugin -->
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/map-study.js"></script>
+  <script>
+    // Campus Security: call on mobile, open website on desktop
+    document.getElementById('campus-security-btn').addEventListener('click', function(e) {
+      const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile) {
+        e.preventDefault();
+        window.location.href = 'tel:6048222222';
+      }
+    });
+  </script>
+</body>
+</html>
